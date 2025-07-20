@@ -4,6 +4,10 @@ from constants import *
 
 from player import *
 
+updatables = pygame.sprite.Group()
+drawables = pygame.sprite.Group()
+Player.containers = (updatables, drawables)
+
 def main():
 
     pygame.init
@@ -28,9 +32,10 @@ def main():
         
         screen.fill((0,0,0))
 
-        player.draw(screen)
+        updatables.update(dt)
 
-        player.update(dt)
+        for thing in drawables:
+            thing.draw(screen)
         
         pygame.display.flip()
 
